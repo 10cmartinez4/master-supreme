@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	
+	<script>
+$(document).ready(function(){
+    $("#btnSubmit").click(function(){
+        //ajax call here        
+        var connectCode = $("#connectCode").val();
+        alert("code: " + connectCode);
+        
+        //disable button here and notify user
+        
+        $.post("connect-code.php", {advisor_code: connectCode },
+        	function(data, status){
+        	alert(data.status);
+        		if(data.status == "0")
+        			alert(data.message);
+        		else if(data.status == "1")
+        			window.location.replace(data.url);
+        	});
+    });
+});
+</script>
+</head>
+<body>
+
+Code: <input id="connectCode" name="advisor_code"><br>
+<button id="btnSubmit">Submit</button>
+
+</body>
+</html>
